@@ -9,5 +9,6 @@
   "networkAccess": {
     "allowedDomains": ["none"]
   },
-  "tagline": "選択ノードのCSSを開発用途別に分類表示"
+  "tagline": "選択ノードのCSSを開発用途別に分類表示",
+  "learnMoreLink": "https://YOUR_USERNAME.github.io/figma-css-inspector/"
 }

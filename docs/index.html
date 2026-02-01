@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Inspector - Figma Plugin</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #fafafa;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .logo {
+      font-size: 48px;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      font-size: 36px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: #1a1a1a;
+    }
+
+    .tagline {
+      font-size: 18px;
+      color: #666;
+      margin-bottom: 24px;
+    }
+
+    .cta-button {
+      display: inline-block;
+      background-color: #0d99ff;
+      color: white;
+      padding: 14px 32px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 16px;
+      transition: background-color 0.2s;
+    }
+
+    .cta-button:hover {
+      background-color: #0b87e0;
+    }
+
+    section {
+      background: white;
+      border-radius: 12px;
+      padding: 32px;
+      margin-bottom: 24px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      color: #1a1a1a;
+    }
+
+    h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: #333;
+    }
+
+    p {
+      margin-bottom: 16px;
+      color: #555;
+    }
+
+    ul {
+      margin-left: 24px;
+      margin-bottom: 16px;
+    }
+
+    li {
+      margin-bottom: 8px;
+      color: #555;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 24px;
+      margin-top: 20px;
+    }
+
+    .feature-item {
+      text-align: center;
+      padding: 20px;
+      background: #f8f9fa;
+      border-radius: 8px;
+    }
+
+    .feature-icon {
+      font-size: 32px;
+      margin-bottom: 12px;
+    }
+
+    .feature-title {
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #333;
+    }
+
+    .feature-desc {
+      font-size: 14px;
+      color: #666;
+    }
+
+    .steps {
+      counter-reset: step;
+    }
+
+    .step {
+      position: relative;
+      padding-left: 48px;
+      margin-bottom: 24px;
+    }
+
+    .step::before {
+      counter-increment: step;
+      content: counter(step);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 32px;
+      height: 32px;
+      background: #0d99ff;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    code {
+      background: #f1f3f4;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: 'SF Mono', Monaco, Consolas, monospace;
+      font-size: 14px;
+    }
+
+    .category-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .category-tag {
+      background: #e8f4fd;
+      color: #0d99ff;
+      padding: 4px 12px;
+      border-radius: 16px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      color: #888;
+      font-size: 14px;
+    }
+
+    footer a {
+      color: #0d99ff;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">🎨</div>
+      <h1>CSS Inspector</h1>
+      <p class="tagline">選択ノードのCSSを開発用途別に分類表示</p>
+      <a href="https://www.figma.com/community/plugin/YOUR_PLUGIN_ID" class="cta-button">
+        Figmaで使ってみる
+      </a>
+    </header>
+
+    <section>
+      <h2>概要</h2>
+      <p>
+        CSS Inspector は、Figmaで選択したノードからCSSプロパティを抽出し、
+        開発用途別に分類して表示するプラグインです。
+        <strong>Dev Mode不要</strong>で、誰でも無料でCSSを確認できます。
+      </p>
+      <div class="category-list">
+        <span class="category-tag">レイアウト</span>
+        <span class="category-tag">スペーシング</span>
+        <span class="category-tag">タイポグラフィ</span>
+        <span class="category-tag">カラー</span>
+        <span class="category-tag">ボーダー</span>
+        <span class="category-tag">エフェクト</span>
+      </div>
+    </section>
+
+    <section>
+      <h2>特徴</h2>
+      <div class="feature-grid">
+        <div class="feature-item">
+          <div class="feature-icon">📋</div>
+          <div class="feature-title">ワンクリックコピー</div>
+          <div class="feature-desc">プロパティをクリックするだけでコピー</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">📂</div>
+          <div class="feature-title">カテゴリ分類</div>
+          <div class="feature-desc">6つのカテゴリで整理表示</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🆓</div>
+          <div class="feature-title">Dev Mode不要</div>
+          <div class="feature-desc">Freeプランでも利用可能</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">⚡</div>
+          <div class="feature-title">高速</div>
+          <div class="feature-desc">500ms以内にCSS表示</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>インストール方法</h2>
+      <div class="steps">
+        <div class="step">
+          <h3>Figma Community からインストール</h3>
+          <p>
+            上の「Figmaで使ってみる」ボタンをクリックするか、
+            Figma内で <code>CSS Inspector</code> を検索してインストールしてください。
+          </p>
+        </div>
+        <div class="step">
+          <h3>プラグインを実行</h3>
+          <p>
+            Figmaのメニューから <code>Plugins</code> → <code>CSS Inspector</code> を選択して実行します。
+          </p>
+        </div>
+        <div class="step">
+          <h3>ノードを選択</h3>
+          <p>
+            CSSを確認したいフレーム、テキスト、シェイプなどを選択すると、
+            自動的にCSSプロパティが表示されます。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>使い方</h2>
+      <h3>プロパティをコピー</h3>
+      <ul>
+        <li><strong>個別コピー</strong>: プロパティ行をクリック</li>
+        <li><strong>カテゴリコピー</strong>: カテゴリヘッダーのコピーボタンをクリック</li>
+        <li><strong>全体コピー</strong>: ヘッダーのコピーボタンをクリック</li>
+      </ul>
+
+      <h3>カテゴリの折りたたみ</h3>
+      <p>カテゴリヘッダーをクリックすると、そのカテゴリを折りたたみ/展開できます。</p>
+    </section>
+
+    <section>
+      <h2>対応ノードタイプ</h2>
+      <p>以下のノードタイプからCSSを抽出できます：</p>
+      <ul>
+        <li>Frame / Component / Instance</li>
+        <li>Rectangle / Ellipse / Polygon / Star</li>
+        <li>Text</li>
+        <li>Vector / Line / Boolean Operation</li>
+        <li>Section</li>
+      </ul>
+      <p><em>※ Group ノードはCSS抽出に対応していません。</em></p>
+    </section>
+
+    <footer>
+      <p>
+        Made with ❤️ for designers and developers<br>
+        <a href="https://github.com/YOUR_USERNAME/figma-css-inspector">GitHub</a>
+      </p>
+    </footer>
+  </div>
+</body>
+</html>

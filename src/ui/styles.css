@@ -248,16 +248,7 @@
   padding: 0 0 4px 0;
 }
 
-.category-property-item {
-  display: flex;
-  align-items: baseline;
+/* PropertyItem within category uses nested styling */
+.category-properties .property-item {
   padding: 4px 12px 4px 28px;
-  font-family: 'SF Mono', 'Menlo', 'Monaco', 'Consolas', monospace;
-  font-size: 11px;
-  cursor: pointer;
-  transition: background-color 0.1s ease;
-}
-
-.category-property-item:hover {
-  background-color: var(--figma-color-bg-hover);
 }

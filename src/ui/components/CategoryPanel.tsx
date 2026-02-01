@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { ICSSCategory, ICSSProperty } from '../../types';
+import { PropertyItem } from './PropertyItem';
 
 interface CategoryPanelProps {
   category: ICSSCategory;
@@ -64,15 +65,11 @@ export const CategoryPanel: React.FC<CategoryPanelProps> = ({
       {isExpanded && (
         <ul className="category-properties">
           {category.properties.map((prop) => (
-            <li
+            <PropertyItem
               key={prop.name}
-              className="category-property-item"
-              onClick={() => handleCopyProperty(prop)}
-              title="クリックでコピー"
-            >
-              <span className="property-name">{prop.name}</span>
-              <span className="property-value">{prop.value}</span>
-            </li>
+              property={prop}
+              onCopy={handleCopyProperty}
+            />
           ))}
         </ul>
       )}

@@ -8,6 +8,7 @@ import {
 } from '../types';
 import { CategoryPanel } from './components/CategoryPanel';
 import { EmptyState, ErrorState, LoadingState } from './components/StateDisplay';
+import { copyManager } from './utils/CopyManager';
 import './styles.css';
 
 /**
@@ -101,15 +102,14 @@ export const App: React.FC = () => {
    * Handle copy for category (multiple properties)
    */
   const handleCopyCategory = useCallback((properties: ICSSProperty[]) => {
-    const text = properties.map((p) => p.formatted).join('\n');
-    navigator.clipboard.writeText(text).catch(console.error);
+    copyManager.copyProperties(properties);
   }, []);
 
   /**
    * Handle copy for single property
    */
   const handleCopyProperty = useCallback((property: ICSSProperty) => {
-    navigator.clipboard.writeText(property.formatted).catch(console.error);
+    copyManager.copyProperty(property);
   }, []);
 
   /**

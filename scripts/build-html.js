@@ -3,12 +3,19 @@ const path = require('path');
 
 const distDir = path.join(__dirname, '..', 'dist');
 const uiJsPath = path.join(distDir, 'ui.js');
+const uiCssPath = path.join(distDir, 'ui.css');
 const uiHtmlPath = path.join(distDir, 'ui.html');
 
 // Read the bundled JavaScript
 const jsContent = fs.readFileSync(uiJsPath, 'utf8');
 
-// Create HTML with inline script
+// Read the bundled CSS if it exists
+let cssContent = '';
+if (fs.existsSync(uiCssPath)) {
+  cssContent = fs.readFileSync(uiCssPath, 'utf8');
+}
+
+// Create HTML with inline script and styles
 const html = `<!DOCTYPE html>
 <html>
 <head>
@@ -27,6 +34,7 @@ const html = `<!DOCTYPE html>
       color: var(--figma-color-text);
       background-color: var(--figma-color-bg);
     }
+    ${cssContent}
   </style>
 </head>
 <body>

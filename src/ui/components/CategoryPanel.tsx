@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, memo } from 'react';
 import { ICSSCategory, ICSSProperty } from '../../types';
 import { PropertyItem } from './PropertyItem';
 
@@ -13,8 +13,9 @@ interface CategoryPanelProps {
  * - Displays category header with collapse/expand toggle
  * - Shows property list when expanded
  * - Provides copy button for entire category
+ * - Memoized to prevent unnecessary re-renders
  */
-export const CategoryPanel: React.FC<CategoryPanelProps> = ({
+const CategoryPanelComponent: React.FC<CategoryPanelProps> = ({
   category,
   onCopyCategory,
   onCopyProperty,
@@ -80,7 +81,12 @@ export const CategoryPanel: React.FC<CategoryPanelProps> = ({
 /**
  * Simple copy icon component
  */
-const CopyIcon: React.FC = () => (
+export const CategoryPanel = memo(CategoryPanelComponent);
+
+/**
+ * Simple copy icon component (memoized)
+ */
+const CopyIcon: React.FC = memo(() => (
   <svg
     width="12"
     height="12"
@@ -103,6 +109,6 @@ const CopyIcon: React.FC = () => (
       strokeLinejoin="round"
     />
   </svg>
-);
+));
 
 export default CategoryPanel;

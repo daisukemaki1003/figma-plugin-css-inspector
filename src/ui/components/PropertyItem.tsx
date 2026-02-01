@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, memo } from 'react';
 import { ICSSProperty } from '../../types';
 
 interface PropertyItemProps {
@@ -12,8 +12,9 @@ interface PropertyItemProps {
  * - Uses monospace font for code display
  * - Handles click to copy property
  * - Supports word-break for long values
+ * - Memoized to prevent unnecessary re-renders
  */
-export const PropertyItem: React.FC<PropertyItemProps> = ({
+const PropertyItemComponent: React.FC<PropertyItemProps> = ({
   property,
   onCopy,
 }) => {
@@ -32,5 +33,7 @@ export const PropertyItem: React.FC<PropertyItemProps> = ({
     </li>
   );
 };
+
+export const PropertyItem = memo(PropertyItemComponent);
 
 export default PropertyItem;

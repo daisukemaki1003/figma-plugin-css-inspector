@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 interface HeaderProps {
   nodeName: string;
@@ -10,8 +10,9 @@ interface HeaderProps {
  * Header component
  * - Displays node name and type
  * - Provides copy all button with icon and tooltip
+ * - Memoized to prevent unnecessary re-renders
  */
-export const Header: React.FC<HeaderProps> = ({
+const HeaderComponent: React.FC<HeaderProps> = ({
   nodeName,
   nodeType,
   onCopyAll,
@@ -31,10 +32,12 @@ export const Header: React.FC<HeaderProps> = ({
   );
 };
 
+export const Header = memo(HeaderComponent);
+
 /**
- * Copy icon component
+ * Copy icon component (memoized)
  */
-const CopyIcon: React.FC = () => (
+const CopyIcon: React.FC = memo(() => (
   <svg
     width="14"
     height="14"
@@ -57,6 +60,6 @@ const CopyIcon: React.FC = () => (
       strokeLinejoin="round"
     />
   </svg>
-);
+));
 
 export default Header;

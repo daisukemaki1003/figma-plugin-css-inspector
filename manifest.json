@@ -4,11 +4,13 @@
   "api": "1.0.0",
   "main": "dist/code.js",
   "ui": "dist/ui.html",
-  "editorType": ["figma"],
+  "editorType": [
+    "figma"
+  ],
   "documentAccess": "dynamic-page",
   "networkAccess": {
-    "allowedDomains": ["none"]
-  },
-  "tagline": "選択ノードのCSSを開発用途別に分類表示",
-  "learnMoreLink": "https://daisukemaki1003.github.io/figma-plugin-css-inspector/"
+    "allowedDomains": [
+      "none"
+    ]
+  }
 }

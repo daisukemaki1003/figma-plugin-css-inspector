@@ -3,16 +3,38 @@
    Designed to harmonize with Figma's design system
    ============================================================================ */
 
-/* Base styles */
+/* ============================================================================
+   Global Styles & Accessibility
+   ============================================================================ */
+
+/* Focus ring for keyboard navigation (accessibility) */
+*:focus-visible {
+  outline: 2px solid var(--figma-color-border-brand, #0d99ff);
+  outline-offset: 2px;
+}
+
+/* Remove default focus for mouse users */
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ============================================================================
+   Base Styles
+   ============================================================================ */
+
 .app {
   display: flex;
   flex-direction: column;
   height: 100%;
+  min-height: 0;
   background-color: var(--figma-color-bg);
   color: var(--figma-color-text);
 }
 
-/* State container (loading, error, empty) */
+/* ============================================================================
+   State Container (Loading, Error, Empty)
+   ============================================================================ */
+
 .state-container {
   display: flex;
   flex-direction: column;
@@ -38,9 +60,13 @@
   font-size: 12px;
   color: var(--figma-color-text-secondary);
   line-height: 1.5;
+  max-width: 240px;
 }
 
-/* Loading spinner */
+/* ============================================================================
+   Loading Spinner
+   ============================================================================ */
+
 .loading-spinner {
   width: 24px;
   height: 24px;
@@ -57,7 +83,10 @@
   }
 }
 
-/* Header */
+/* ============================================================================
+   Header
+   ============================================================================ */
+
 .header {
   display: flex;
   align-items: center;
@@ -65,6 +94,7 @@
   padding: 12px 16px;
   border-bottom: 1px solid var(--figma-color-border);
   background-color: var(--figma-color-bg-secondary);
+  flex-shrink: 0;
 }
 
 .header-title {
@@ -72,6 +102,7 @@
   font-weight: 600;
   margin: 0;
   flex: 1;
+  min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -83,6 +114,7 @@
   background-color: var(--figma-color-bg-tertiary);
   padding: 2px 6px;
   border-radius: 4px;
+  flex-shrink: 0;
 }
 
 .header-copy-btn {
@@ -97,6 +129,7 @@
   color: var(--figma-color-text-secondary);
   cursor: pointer;
   border-radius: 4px;
+  flex-shrink: 0;
   transition: background-color 0.1s ease, color 0.1s ease;
 }
 
@@ -107,71 +140,19 @@
 
 .header-copy-btn:active {
   background-color: var(--figma-color-bg-pressed, var(--figma-color-bg-tertiary));
+  transform: scale(0.95);
 }
 
-/* Content */
+/* ============================================================================
+   Content Area
+   ============================================================================ */
+
 .content {
   flex: 1;
   overflow-y: auto;
+  overflow-x: hidden;
   padding: 8px 0;
-}
-
-/* Category */
-.category {
-  margin-bottom: 8px;
-}
-
-.category-header {
-  display: flex;
-  align-items: center;
-  padding: 8px 16px;
-  font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: var(--figma-color-text-secondary);
-  cursor: pointer;
-  user-select: none;
-}
-
-.category-header:hover {
-  background-color: var(--figma-color-bg-hover);
-}
-
-/* Property list */
-.property-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.property-item {
-  display: flex;
-  align-items: baseline;
-  padding: 4px 16px;
-  font-family: 'SF Mono', 'Menlo', 'Monaco', 'Consolas', monospace;
-  font-size: 11px;
-  cursor: pointer;
-  transition: background-color 0.1s ease;
-}
-
-.property-item:hover {
-  background-color: var(--figma-color-bg-hover);
-}
-
-.property-name {
-  color: var(--figma-color-text-secondary);
-  margin-right: 4px;
-  flex-shrink: 0;
-}
-
-.property-name::after {
-  content: ':';
-}
-
-.property-value {
-  color: var(--figma-color-text);
-  word-break: break-word;
+  min-height: 0;
 }
 
 /* Scrollbar styling */
@@ -208,16 +189,22 @@
   cursor: pointer;
   user-select: none;
   transition: background-color 0.1s ease;
+  border-radius: 0;
 }
 
 .category-panel-header:hover {
   background-color: var(--figma-color-bg-hover);
 }
 
+.category-panel-header:active {
+  background-color: var(--figma-color-bg-pressed, var(--figma-color-bg-hover));
+}
+
 .category-chevron {
   font-size: 8px;
   color: var(--figma-color-text-secondary);
   transition: transform 0.15s ease;
+  flex-shrink: 0;
 }
 
 .category-chevron.expanded {
@@ -231,6 +218,10 @@
   text-transform: uppercase;
   letter-spacing: 0.5px;
   color: var(--figma-color-text-secondary);
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .category-count {
@@ -239,6 +230,7 @@
   background-color: var(--figma-color-bg-tertiary);
   padding: 1px 5px;
   border-radius: 8px;
+  flex-shrink: 0;
 }
 
 .category-copy-btn {
@@ -254,10 +246,12 @@
   cursor: pointer;
   border-radius: 4px;
   opacity: 0;
+  flex-shrink: 0;
   transition: opacity 0.1s ease, background-color 0.1s ease;
 }
 
-.category-panel-header:hover .category-copy-btn {
+.category-panel-header:hover .category-copy-btn,
+.category-copy-btn:focus-visible {
   opacity: 1;
 }
 
@@ -266,10 +260,36 @@
   color: var(--figma-color-text);
 }
 
+.category-copy-btn:active {
+  transform: scale(0.9);
+}
+
 .category-properties {
   list-style: none;
   margin: 0;
   padding: 0 0 4px 0;
+}
+
+/* ============================================================================
+   Property Item
+   ============================================================================ */
+
+.property-item {
+  display: flex;
+  align-items: baseline;
+  padding: 4px 16px;
+  font-family: 'SF Mono', 'Menlo', 'Monaco', 'Consolas', monospace;
+  font-size: 11px;
+  cursor: pointer;
+  transition: background-color 0.1s ease;
+}
+
+.property-item:hover {
+  background-color: var(--figma-color-bg-hover);
+}
+
+.property-item:active {
+  background-color: var(--figma-color-bg-pressed, var(--figma-color-bg-hover));
 }
 
 /* PropertyItem within category uses nested styling */
@@ -277,14 +297,31 @@
   padding: 4px 12px 4px 28px;
 }
 
+.property-name {
+  color: var(--figma-color-text-secondary);
+  margin-right: 4px;
+  flex-shrink: 0;
+}
+
+.property-name::after {
+  content: ':';
+}
+
+.property-value {
+  color: var(--figma-color-text);
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
 /* ============================================================================
-   Toast Notification Component
+   Toast Notification
    ============================================================================ */
 
 .toast {
   position: fixed;
   bottom: 16px;
   right: 16px;
+  left: 16px;
   padding: 10px 16px;
   border-radius: 6px;
   font-size: 12px;
@@ -292,6 +329,7 @@
   z-index: 1000;
   animation: toast-slide-in 0.2s ease-out;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  text-align: center;
 }
 
 .toast.success {
@@ -307,6 +345,7 @@
 .toast-message {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
 }
 
@@ -318,5 +357,43 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* ============================================================================
+   Responsive Adjustments
+   ============================================================================ */
+
+/* Narrow plugin window */
+@media (max-width: 240px) {
+  .header {
+    padding: 10px 12px;
+    gap: 6px;
+  }
+
+  .header-type {
+    display: none;
+  }
+
+  .category-panel-header {
+    padding: 8px 10px;
+  }
+
+  .category-properties .property-item {
+    padding: 4px 10px 4px 24px;
+  }
+
+  .toast {
+    left: 8px;
+    right: 8px;
+    bottom: 8px;
+    padding: 8px 12px;
+  }
+}
+
+/* Very narrow window */
+@media (max-width: 180px) {
+  .category-count {
+    display: none;
   }
 }

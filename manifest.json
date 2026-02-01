@@ -8,5 +8,6 @@
   "documentAccess": "dynamic-page",
   "networkAccess": {
     "allowedDomains": ["none"]
-  }
+  },
+  "tagline": "選択ノードのCSSを開発用途別に分類表示"
 }

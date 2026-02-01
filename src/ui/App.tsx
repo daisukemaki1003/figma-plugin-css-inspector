@@ -8,6 +8,8 @@ import {
 } from '../types';
 import { CategoryPanel } from './components/CategoryPanel';
 import { EmptyState, ErrorState, LoadingState } from './components/StateDisplay';
+import { Header } from './components/Header';
+import { ToastProvider, useToast } from './components/Toast';
 import { copyManager } from './utils/CopyManager';
 import './styles.css';
 
@@ -32,13 +34,11 @@ const initialState: AppState = {
 };
 
 /**
- * Main App component
- * - Receives messages from Plugin (Main Thread)
- * - Manages application state (CSS data, loading, error)
- * - Renders appropriate UI based on state
+ * Inner App component with toast functionality
  */
-export const App: React.FC = () => {
+const AppContent: React.FC = () => {
   const [state, setState] = useState<AppState>(initialState);
+  const { showToast } = useToast();
 
   /**
    * Handle incoming messages from the plugin
@@ -101,16 +101,42 @@ export const App: React.FC = () => {
   /**
    * Handle copy for category (multiple properties)
    */
-  const handleCopyCategory = useCallback((properties: ICSSProperty[]) => {
-    copyManager.copyProperties(properties);
-  }, []);
+  const handleCopyCategory = useCallback(
+    async (properties: ICSSProperty[]) => {
+      const success = await copyManager.copyProperties(properties);
+      showToast(
+        success ? 'コピーしました' : 'コピーに失敗しました',
+        success ? 'success' : 'error'
+      );
+    },
+    [showToast]
+  );
 
   /**
    * Handle copy for single property
    */
-  const handleCopyProperty = useCallback((property: ICSSProperty) => {
-    copyManager.copyProperty(property);
-  }, []);
+  const handleCopyProperty = useCallback(
+    async (property: ICSSProperty) => {
+      const success = await copyManager.copyProperty(property);
+      showToast(
+        success ? 'コピーしました' : 'コピーに失敗しました',
+        success ? 'success' : 'error'
+      );
+    },
+    [showToast]
+  );
+
+  /**
+   * Handle copy all properties from all categories
+   */
+  const handleCopyAll = useCallback(async () => {
+    if (!state.cssData) return;
+    const success = await copyManager.copyAllCategories(state.cssData.categories);
+    showToast(
+      success ? 'すべてコピーしました' : 'コピーに失敗しました',
+      success ? 'success' : 'error'
+    );
+  }, [state.cssData, showToast]);
 
   /**
    * Render loading state
@@ -150,10 +176,11 @@ export const App: React.FC = () => {
    */
   return (
     <div className="app">
-      <header className="header">
-        <h1 className="header-title">{state.cssData.nodeName}</h1>
-        <span className="header-type">{state.cssData.nodeType}</span>
-      </header>
+      <Header
+        nodeName={state.cssData.nodeName}
+        nodeType={state.cssData.nodeType}
+        onCopyAll={handleCopyAll}
+      />
       <main className="content">
         {state.cssData.categories.map((category) => (
           <CategoryPanel
@@ -165,5 +192,16 @@ export const App: React.FC = () => {
         ))}
       </main>
     </div>
+  );
+};
+
+/**
+ * Main App component with ToastProvider
+ */
+export const App: React.FC = () => {
+  return (
+    <ToastProvider>
+      <AppContent />
+    </ToastProvider>
   );
 };

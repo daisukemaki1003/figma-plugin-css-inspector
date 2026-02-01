@@ -85,6 +85,30 @@
   border-radius: 4px;
 }
 
+.header-copy-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--figma-color-text-secondary);
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.1s ease, color 0.1s ease;
+}
+
+.header-copy-btn:hover {
+  background-color: var(--figma-color-bg-tertiary);
+  color: var(--figma-color-text);
+}
+
+.header-copy-btn:active {
+  background-color: var(--figma-color-bg-pressed, var(--figma-color-bg-tertiary));
+}
+
 /* Content */
 .content {
   flex: 1;

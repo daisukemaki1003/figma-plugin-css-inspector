@@ -3,7 +3,7 @@
 ## Tasks
 
 - [ ] 1. プロジェクト基盤のセットアップ
-- [ ] 1.1 Figmaプラグインプロジェクトの初期化
+- [x] 1.1 Figmaプラグインプロジェクトの初期化
   - TypeScriptとReactを使用したFigmaプラグインの基盤を構築する
   - manifest.jsonでプラグイン名、ID、UIファイルを設定する
   - esbuildでMain Thread用とUI用の2つのビルドターゲットを設定する

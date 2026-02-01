@@ -2,14 +2,14 @@
 
 **選択ノードのCSSを開発用途別に分類表示する Figma プラグイン**
 
-[![Figma](https://img.shields.io/badge/Figma-Plugin-ff7262?logo=figma&logoColor=white)](https://www.figma.com/community/plugin/YOUR_PLUGIN_ID)
-[![GitHub Pages](https://img.shields.io/badge/Docs-GitHub%20Pages-blue)](https://YOUR_USERNAME.github.io/figma-css-inspector/)
+[![Figma](https://img.shields.io/badge/Figma-Plugin-ff7262?logo=figma&logoColor=white)](https://www.figma.com/community/plugin/1599691248568814638)
+[![GitHub Pages](https://img.shields.io/badge/Docs-GitHub%20Pages-blue)](https://daisukemaki1003.github.io/figma-plugin-css-inspector/)
 
 ## 概要
 
 CSS Inspector は、Figmaで選択したノードからCSSプロパティを抽出し、開発用途別に分類して表示するプラグインです。**Dev Mode不要**で、誰でも無料でCSSを確認できます。
 
-👉 **[ドキュメント・使い方はこちら](https://YOUR_USERNAME.github.io/figma-css-inspector/)**
+👉 **[ドキュメント・使い方はこちら](https://daisukemaki1003.github.io/figma-plugin-css-inspector/)**
 
 ## 特徴
 
@@ -22,14 +22,14 @@ CSS Inspector は、Figmaで選択したノードからCSSプロパティを抽�
 
 ### Figma Community から
 
-1. [CSS Inspector](https://www.figma.com/community/plugin/YOUR_PLUGIN_ID) を開く
+1. [CSS Inspector](https://www.figma.com/community/plugin/1599691248568814638) を開く
 2. 「Try it out」をクリック
 
 ### 開発版
 
 ```bash
 # リポジトリをクローン
-git clone https://github.com/YOUR_USERNAME/figma-css-inspector.git
+git clone https://github.com/daisukemaki1003/figma-plugin-css-inspector.git
 cd figma-css-inspector
 
 # 依存関係をインストール

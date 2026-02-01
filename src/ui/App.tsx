@@ -2,9 +2,11 @@ import React, { useState, useEffect, useCallback } from 'react';
 import {
   ICategorizedCSS,
   IErrorMessage,
+  ICSSProperty,
   PluginToUIMessage,
   isPluginToUIMessage,
 } from '../types';
+import { CategoryPanel } from './components/CategoryPanel';
 import './styles.css';
 
 /**
@@ -95,6 +97,21 @@ export const App: React.FC = () => {
   }, [handleMessage]);
 
   /**
+   * Handle copy for category (multiple properties)
+   */
+  const handleCopyCategory = useCallback((properties: ICSSProperty[]) => {
+    const text = properties.map((p) => p.formatted).join('\n');
+    navigator.clipboard.writeText(text).catch(console.error);
+  }, []);
+
+  /**
+   * Handle copy for single property
+   */
+  const handleCopyProperty = useCallback((property: ICSSProperty) => {
+    navigator.clipboard.writeText(property.formatted).catch(console.error);
+  }, []);
+
+  /**
    * Render loading state
    */
   if (state.isLoading) {
@@ -139,7 +156,7 @@ export const App: React.FC = () => {
   }
 
   /**
-   * Render CSS data
+   * Render CSS data with CategoryPanel components
    */
   return (
     <div className="app">
@@ -148,21 +165,14 @@ export const App: React.FC = () => {
         <span className="header-type">{state.cssData.nodeType}</span>
       </header>
       <main className="content">
-        {state.cssData.categories
-          .filter((cat) => !cat.isEmpty)
-          .map((category) => (
-            <section key={category.id} className="category">
-              <h2 className="category-header">{category.name}</h2>
-              <ul className="property-list">
-                {category.properties.map((prop) => (
-                  <li key={prop.name} className="property-item">
-                    <span className="property-name">{prop.name}</span>
-                    <span className="property-value">{prop.value}</span>
-                  </li>
-                ))}
-              </ul>
-            </section>
-          ))}
+        {state.cssData.categories.map((category) => (
+          <CategoryPanel
+            key={category.id}
+            category={category}
+            onCopyCategory={handleCopyCategory}
+            onCopyProperty={handleCopyProperty}
+          />
+        ))}
       </main>
     </div>
   );

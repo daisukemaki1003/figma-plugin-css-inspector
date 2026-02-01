@@ -4,10 +4,10 @@
   "description": "Figma plugin to extract and categorize CSS properties from selected nodes",
   "scripts": {
     "build": "npm run build:code && npm run build:ui",
-    "build:code": "esbuild src/code.ts --bundle --outfile=dist/code.js --target=es2020",
+    "build:code": "esbuild src/code.ts --bundle --outfile=dist/code.js --target=es6",
     "build:ui": "esbuild src/ui/index.tsx --bundle --outfile=dist/ui.js --target=es2020 --loader:.tsx=tsx --loader:.ts=ts && node scripts/build-html.js",
     "watch": "concurrently \"npm run watch:code\" \"npm run watch:ui\"",
-    "watch:code": "esbuild src/code.ts --bundle --outfile=dist/code.js --target=es2020 --watch",
+    "watch:code": "esbuild src/code.ts --bundle --outfile=dist/code.js --target=es6 --watch",
     "watch:ui": "esbuild src/ui/index.tsx --bundle --outfile=dist/ui.js --target=es2020 --loader:.tsx=tsx --loader:.ts=ts --watch",
     "test": "vitest run",
     "test:watch": "vitest"

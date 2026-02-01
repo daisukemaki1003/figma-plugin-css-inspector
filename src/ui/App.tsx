@@ -7,6 +7,7 @@ import {
   isPluginToUIMessage,
 } from '../types';
 import { CategoryPanel } from './components/CategoryPanel';
+import { EmptyState, ErrorState, LoadingState } from './components/StateDisplay';
 import './styles.css';
 
 /**
@@ -117,10 +118,7 @@ export const App: React.FC = () => {
   if (state.isLoading) {
     return (
       <div className="app">
-        <div className="state-container">
-          <div className="loading-spinner" />
-          <p className="state-text">CSSを取得中...</p>
-        </div>
+        <LoadingState />
       </div>
     );
   }
@@ -131,10 +129,7 @@ export const App: React.FC = () => {
   if (state.error) {
     return (
       <div className="app">
-        <div className="state-container error">
-          <p className="state-title">エラー</p>
-          <p className="state-text">{state.error.message}</p>
-        </div>
+        <ErrorState error={state.error} />
       </div>
     );
   }
@@ -145,12 +140,7 @@ export const App: React.FC = () => {
   if (!state.hasSelection || !state.cssData) {
     return (
       <div className="app">
-        <div className="state-container">
-          <p className="state-title">ノードを選択してください</p>
-          <p className="state-text">
-            FigmaでフレームやテキストなどのノードをクリックするとCSSが表示されます
-          </p>
-        </div>
+        <EmptyState />
       </div>
     );
   }
